@@ -79,7 +79,7 @@ const App = () => {
   
 
   return (
-    <div>
+    <div style={{ paddingBottom: '50px' }}>
       <iframe 
         src={`https://www.easyquran-eg.com/qrhafs/page/${pageNumber}`} 
         width="100%" 
