@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import TextField from '@mui/material/TextField';
+import { TbArrowsMaximize } from "react-icons/tb";
 
 const App = () => {
   // Initialize the page number in state
@@ -48,6 +49,20 @@ const App = () => {
     }
   };
 
+  const enterFullscreen = () => {
+    const elem = document.documentElement; 
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { 
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { 
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { 
+      elem.msRequestFullscreen();
+    }
+  };
+  
+
   return (
     <div>
       <iframe 
@@ -59,6 +74,8 @@ const App = () => {
       </iframe>
 
       <div style={{ gap: '10px' }}>
+        
+        <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
           <FaArrowCircleLeft 
             style={{ fontSize: '50px', cursor: 'pointer' }} 
@@ -83,7 +100,14 @@ const App = () => {
             style={{ fontSize: '50px', cursor: 'pointer' }} 
             onClick={handleRightClick} 
           />
+
+          <TbArrowsMaximize style={{ fontSize: '30px'}} onClick={enterFullscreen}/>
+          </div>
+
         </div>
+
+        
+
       </div>
     </div>
   );
