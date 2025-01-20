@@ -50,17 +50,32 @@ const App = () => {
   };
 
   const enterFullscreen = () => {
-    const elem = document.documentElement; 
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { 
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { 
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { 
-      elem.msRequestFullscreen();
+    if (!document.fullscreenElement) {
+      // Enter fullscreen mode
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { 
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { 
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { 
+        elem.msRequestFullscreen();
+      }
+    } else {
+      // Exit fullscreen mode
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { 
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { 
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { 
+        document.msExitFullscreen();
+      }
     }
   };
+  
   
 
   return (
@@ -75,7 +90,6 @@ const App = () => {
 
       <div style={{ gap: '10px' }}>
         
-        <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
           <FaArrowCircleLeft 
             style={{ fontSize: '50px', cursor: 'pointer' }} 
@@ -102,11 +116,8 @@ const App = () => {
           />
 
           <TbArrowsMaximize style={{ fontSize: '30px'}} onClick={enterFullscreen}/>
-          </div>
 
         </div>
-
-        
 
       </div>
     </div>
